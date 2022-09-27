@@ -18,6 +18,8 @@ class CreateTodosTable extends Migration
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->string('title',100);
             $table->timestamp('updated_at')->useCurrent()->nullable();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('tag_id')->constrained('tags');
         });
     }
 

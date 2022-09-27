@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class TodosTableSeeder extends Seeder
+class AuthorsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,9 +13,6 @@ class TodosTableSeeder extends Seeder
      */
     public function run()
     {
-        $title = [
-            'title' => 'laravel入門',
-        ];
-        Todo::create($title);
+        //
     }
 }

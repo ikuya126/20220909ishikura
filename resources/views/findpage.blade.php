@@ -21,10 +21,6 @@
           <input type="submit" value="ログアウト" class="logout-button">
         </form>
       @endif
-        <form action="/findpage" method="get">
-          @csrf
-          <input type="submit" value="タスク検索" class="find-button">
-        </form>
       @if ($errors->any())
       <ul>
         @foreach ($errors->all() as $error)
@@ -33,7 +29,7 @@
       </ul>
       @endif
       <div class="todo">
-        <form action="/create" method="post">
+        <form action="/find" method="post">
           @csrf
           <input type="text" name="title" class="create-todo">
             <select name="tag_title">
@@ -43,7 +39,7 @@
               <option value="食事">食事</option>
               <option value="移動">移動</option>
             </select>
-          <input type="submit" value="追加" class="create-button">
+          <input type="submit" value="検索" class="create-button">
         </form>
       </div>
       <table>
@@ -67,11 +63,11 @@
                 </td>
                 <td>
                   <select name="tag_title">
-                    <option value="1" @if(value === "{{ $todos->tag_id }}") selected @endif>家事</option>
-                    <option value="2" @if(value === "{{$todos->tag_id}}" ) selected @endif>勉強</option>
-                    <option value="3" @if(value === "{{$todos->tag_id}}" ) selected @endif>運動</option>
-                    <option value="3" @if(value === "{{$todos->tag_id}}" ) selected @endif>食事</option>
-                    <option value="3" @if(value === "{{$todos->tag_id}}" ) selected @endif>移動</option>
+                    <option value="1" @if(value == "{{$todos->tag_id }}")selected @endif>家事</option>
+                    <option value="2" @if(value == "{{$todos->tag_id}}" ) selected @endif>勉強</option>
+                    <option value="3" @if(value == "{{$todos->tag_id}}" ) selected @endif>運動</option>
+                    <option value="3" @if(value == "{{$todos->tag_id}}" ) selected @endif>食事</option>
+                    <option value="3" @if(value == "{{$todos->tag_id}}" ) selected @endif>移動</option>
                   </select>
                 </td>
                 <td>
@@ -91,6 +87,10 @@
           @endforeach
         </tbody>
       </table>
+      <form action="/" method="get" >
+          @csrf
+          <input type="submit"  value="戻る" class="return-button">
+      </form>
     </div>
   </div>
 </body>
