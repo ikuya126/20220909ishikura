@@ -12,6 +12,7 @@
   <div class="container">
     <div class="box">
       <p class="box-title">Todo List</p>
+<<<<<<< HEAD
       @if (Auth::check())
         <p>{{$user->name}}でログイン中</p>
       @endif
@@ -25,6 +26,8 @@
           @csrf
           <input type="submit" value="タスク検索" class="find-button">
         </form>
+=======
+>>>>>>> refs/remotes/origin/main
       @if ($errors->any())
       <ul>
         @foreach ($errors->all() as $error)
