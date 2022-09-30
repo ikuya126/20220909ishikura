@@ -17,15 +17,19 @@ class TagsTableSeeder extends Seeder
         $tag_title = [
             'tag_title' => '家事',
         ];
+        Tag::create($tag_title);
         $tag_title = [
             'tag_title' => '勉強',
         ];
+        Tag::create($tag_title);
         $tag_title = [
             'tag_title' => '運動',
         ];
+        Tag::create($tag_title);
         $tag_title = [
             'tag_title' => '食事',
         ];
+        Tag::create($tag_title);
         $tag_title = [
             'tag_title' => '移動',
         ];

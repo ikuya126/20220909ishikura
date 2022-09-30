@@ -14,14 +14,12 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/logout',[
-'uses' => 'TaskController@getLogout',
-'as' => 'user.logout'
-]);
 
 Route::get('/',[TaskController::class,'index'])->middleware('auth');
 Route::post('/create',[TaskController::class,'create']);
 Route::put('/{id}',[TaskController::class,'update']);
 Route::delete('/{id}',[TaskController::class,'delete']);
-Route::get('/findpage',[TaskController::class,'findpage']);
+Route::get('/findpage',[TaskController::class,'findpage'])->name('findpage');
 Route::get('/find',[TaskController::class,'find']);
+Route::get('/logout',[TaskController::class,'logout']);
+

@@ -13,13 +13,17 @@ class CreateTodosTable extends Migration
      */
     public function up()
     {
+
+        
+
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->string('title',100);
             $table->timestamp('updated_at')->useCurrent()->nullable();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('tag_id')->constrained('tags');
+            $table->integer('user_id');
+            $table->integer('tag_id');
+
         });
     }
 

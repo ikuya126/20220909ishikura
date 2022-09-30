@@ -16,7 +16,7 @@
         <p>{{$user->name}}でログイン中</p>
       @endif
       @if(Auth::check())
-        <form action="{{ route('user.logout') }}" method="get">
+        <form action="{{ route('logout') }}" method="post">
           @csrf
           <input type="submit" value="ログアウト" class="logout-button">
         </form>
@@ -29,15 +29,15 @@
       </ul>
       @endif
       <div class="todo">
-        <form action="/find" method="post">
+        <form action="/find" method="get">
           @csrf
           <input type="text" name="title" class="create-todo">
             <select name="tag_title">
-              <option value="家事">家事</option>
-              <option value="勉強">勉強</option>
-              <option value="運動">運動</option>
-              <option value="食事">食事</option>
-              <option value="移動">移動</option>
+              <option value="1">家事</option>
+              <option value="2">勉強</option>
+              <option value="3">運動</option>
+              <option value="4">食事</option>
+              <option value="5">移動</option>
             </select>
           <input type="submit" value="検索" class="create-button">
         </form>
@@ -63,11 +63,31 @@
                 </td>
                 <td>
                   <select name="tag_title">
-                    <option value="1" @if(value == "{{$todos->tag_id }}")selected @endif>家事</option>
-                    <option value="2" @if(value == "{{$todos->tag_id}}" ) selected @endif>勉強</option>
-                    <option value="3" @if(value == "{{$todos->tag_id}}" ) selected @endif>運動</option>
-                    <option value="3" @if(value == "{{$todos->tag_id}}" ) selected @endif>食事</option>
-                    <option value="3" @if(value == "{{$todos->tag_id}}" ) selected @endif>移動</option>
+                    @if("{{$todo->tag_id }}" === 1)
+                    <option  value="1" selected >家事</option>
+                    @else
+                    <option  value="1" >家事</option>
+                    @endif
+                    @if("{{$todo->tag_id }}" === 2)
+                    <option  value="2" selected >勉強</option>
+                    @else
+                    <option  value="2" >勉強</option>
+                    @endif
+                    @if("{{$todo->tag_id }}" === 3)
+                    <option  value="3" selected >運動</option>
+                    @else
+                    <option  value="3" >運動</option>
+                    @endif
+                    @if("{{$todo->tag_id }}" === 4)
+                    <option  value="4" selected >食事</option>
+                    @else
+                    <option  value="4" >食事</option>
+                    @endif
+                    @if("{{$todo->tag_id }}" === 5)
+                    <option  value="5" selected >移動</option>
+                    @else
+                    <option  value="5" >移動</option>
+                    @endif
                   </select>
                 </td>
                 <td>

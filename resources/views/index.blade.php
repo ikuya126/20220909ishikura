@@ -12,22 +12,19 @@
   <div class="container">
     <div class="box">
       <p class="box-title">Todo List</p>
-<<<<<<< HEAD
       @if (Auth::check())
         <p>{{$user->name}}でログイン中</p>
       @endif
       @if(Auth::check())
-        <form action="{{ route('user.logout') }}" method="get">
+        <form action="{{ route('logout') }}" method="post">
           @csrf
           <input type="submit" value="ログアウト" class="logout-button">
         </form>
       @endif
-        <form action="/findpage" method="get">
+        <form action="{{ route('findpage') }}" method="get">
           @csrf
           <input type="submit" value="タスク検索" class="find-button">
         </form>
-=======
->>>>>>> refs/remotes/origin/main
       @if ($errors->any())
       <ul>
         @foreach ($errors->all() as $error)
@@ -40,11 +37,9 @@
           @csrf
           <input type="text" name="title" class="create-todo">
             <select name="tag_title">
-              <option value="家事">家事</option>
-              <option value="勉強">勉強</option>
-              <option value="運動">運動</option>
-              <option value="食事">食事</option>
-              <option value="移動">移動</option>
+              @foreach($tag as $tags)
+              <option value="{{$tags->id}}">{{$tags->tag_title}}</option>
+              @endforeach
             </select>
           <input type="submit" value="追加" class="create-button">
         </form>
@@ -70,11 +65,13 @@
                 </td>
                 <td>
                   <select name="tag_title">
-                    <option value="1" @if(value === "{{ $todos->tag_id }}") selected @endif>家事</option>
-                    <option value="2" @if(value === "{{$todos->tag_id}}" ) selected @endif>勉強</option>
-                    <option value="3" @if(value === "{{$todos->tag_id}}" ) selected @endif>運動</option>
-                    <option value="3" @if(value === "{{$todos->tag_id}}" ) selected @endif>食事</option>
-                    <option value="3" @if(value === "{{$todos->tag_id}}" ) selected @endif>移動</option>
+                    @foreach($tag as $tags)
+                    @if("{{$todo->tag_id }}" == "{{$tags->id}}")
+                    <option  value="{{$tags->id}}" selected >{{$tags->tag_title}}</option>
+                    @else
+                    <option  value="{{tags->id}}" >{{$tags->tag_title}}</option>
+                    @endif
+                    @endforeach
                   </select>
                 </td>
                 <td>
