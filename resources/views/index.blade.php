@@ -11,16 +11,20 @@
 <body>
   <div class="container">
     <div class="box">
-      <p class="box-title">Todo List</p>
-      @if (Auth::check())
-        <p>{{$user->name}}でログイン中</p>
-      @endif
-      @if(Auth::check())
-        <form action="{{ route('logout') }}" method="post">
-          @csrf
-          <input type="submit" value="ログアウト" class="logout-button">
-        </form>
-      @endif
+      <div class="box-top">
+        <p class="box-title">Todo List</p>
+        <div class="box-top-right">
+          @if (Auth::check())
+            <p>「{{$user->name}}」でログイン中</p>
+          @endif
+          @if(Auth::check())
+            <form action="{{ route('logout') }}" method="post">
+              @csrf
+              <input type="submit" value="ログアウト" class="logout-button">
+            </form>
+          @endif
+        </div>
+      </div>
         <form action="{{ route('findpage') }}" method="get">
           @csrf
           <input type="submit" value="タスク検索" class="find-button">
@@ -36,7 +40,7 @@
         <form action="/create" method="post">
           @csrf
           <input type="text" name="title" class="create-todo">
-            <select name="tag_title">
+            <select name="tag_title" >
               @foreach($tag as $tags)
               <option value="{{$tags->id}}">{{$tags->tag_title}}</option>
               @endforeach
@@ -69,7 +73,7 @@
                     @if("{{$todo->tag_id }}" == "{{$tags->id}}")
                     <option  value="{{$tags->id}}" selected >{{$tags->tag_title}}</option>
                     @else
-                    <option  value="{{tags->id}}" >{{$tags->tag_title}}</option>
+                    <option  value="{{$tags->id}}" >{{$tags->tag_title}}</option>
                     @endif
                     @endforeach
                   </select>

@@ -25,9 +25,9 @@ class TaskController extends Controller
 
     public function create(TodoRequest $request)
     {
-        $titles = $request->all();
+        $titles = $request->title;
         $users = Auth::user()->id;
-        $tags = $request->input('tag_title');
+        $tags = $request->tag_title;
         Todo::create(['title' => $titles,'user_id' => $users,'tag_id' => $tags]);
         return redirect('/');
     }
@@ -51,19 +51,25 @@ class TaskController extends Controller
     {
         $tag = Tag::all();
         $user = Auth::user();
-        $todos = Todo::all();
         return view('findpage',[
             'tag' => $tag,
-            'todos' => $todos,
             'user' => $user
         ]);
     }
 
     public function find(TodoRequest $request)
     {
-        $task = $request->all();
-        $find = Todo::find($id->$task);
-        return redirect('/findpage');
+        $titles = $request->title;
+        $users = Auth::user()->id;
+        $tags = $request->tag_title;
+        $tag = Tag::all();
+        $user = Auth::user();
+        $todos = Todo::where(['title'=> $titles,'user_id'=>$users,'tag_id'=>$tags])->first();
+        return view('findpage',[
+            'tag' => $tag,
+            'todos' => $todos,
+            'user' => $user
+        ]);
     }
 
     public function logout() {

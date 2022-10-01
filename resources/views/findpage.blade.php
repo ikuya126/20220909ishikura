@@ -11,16 +11,20 @@
 <body>
   <div class="container">
     <div class="box">
-      <p class="box-title">Todo List</p>
-      @if (Auth::check())
-        <p>{{$user->name}}でログイン中</p>
-      @endif
-      @if(Auth::check())
-        <form action="{{ route('logout') }}" method="post">
-          @csrf
-          <input type="submit" value="ログアウト" class="logout-button">
-        </form>
-      @endif
+      <div class="box-top">
+        <p class="box-title">Todo List</p>
+        <div class="box-top-right">
+          @if (Auth::check())
+            <p>「{{$user->name}}」でログイン中</p>
+          @endif
+          @if(Auth::check())
+            <form action="{{ route('logout') }}" method="post">
+              @csrf
+              <input type="submit" value="ログアウト" class="logout-button">
+            </form>
+          @endif
+        </div>
+      </div>
       @if ($errors->any())
       <ul>
         @foreach ($errors->all() as $error)
@@ -33,11 +37,9 @@
           @csrf
           <input type="text" name="title" class="create-todo">
             <select name="tag_title">
-              <option value="1">家事</option>
-              <option value="2">勉強</option>
-              <option value="3">運動</option>
-              <option value="4">食事</option>
-              <option value="5">移動</option>
+              @foreach($tag as $tags)
+              <option value="{{$tags->id}}">{{$tags->tag_title}}</option>
+              @endforeach
             </select>
           <input type="submit" value="検索" class="create-button">
         </form>
@@ -53,50 +55,35 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($todos as $todo)
-            <tr>
-              <td>{{ $todo->created_at }}</td>
-              <form action="/{{ $todo->id }}" method="post">
+            @isset($todos)
+              <tr>
+              <td>{{ $todos->created_at }}</td>
+              <form action="/find" method="post">
                 @csrf
                 @method("put")
-                <td><input type="text" name="title" class="update-title" value="{{$todo->title}}">
+                <td><input type="text" name="title" class="update-title" value="{{$todos->title}}">
                 </td>
                 <td>
                   <select name="tag_title">
-                    @if("{{$todo->tag_id }}" === 1)
-                    <option  value="1" selected >家事</option>
+                    @foreach($tag as $tags)
+                    @if("{{$todos->tag_id }}" == "{{$tags->id}}")
+                    <option  value="{{$tags->id}}" selected >{{$tags->tag_title}}</option>
                     @else
-                    <option  value="1" >家事</option>
+                    <option  value="{{$tags->id}}" >{{$tags->tag_title}}</option>
                     @endif
-                    @if("{{$todo->tag_id }}" === 2)
-                    <option  value="2" selected >勉強</option>
-                    @else
-                    <option  value="2" >勉強</option>
-                    @endif
-                    @if("{{$todo->tag_id }}" === 3)
-                    <option  value="3" selected >運動</option>
-                    @else
-                    <option  value="3" >運動</option>
-                    @endif
-                    @if("{{$todo->tag_id }}" === 4)
-                    <option  value="4" selected >食事</option>
-                    @else
-                    <option  value="4" >食事</option>
-                    @endif
-                    @if("{{$todo->tag_id }}" === 5)
-                    <option  value="5" selected >移動</option>
-                    @else
-                    <option  value="5" >移動</option>
-                    @endif
+                    @endforeach
                   </select>
                 </td>
+                <form action="/{{ $todos->id }}" method="post" class="update" >
+                @csrf
+                @method('put')
                 <td>
                   <button type="submit"  class="update-button">
                   更新
                   </button>
                 </td>
               </form>
-              <form action="/{{ $todo->id }}" method="post" class="delete" >
+              <form action="/{{ $todos->id }}" method="post" class="delete" >
                 @csrf
                 @method('delete')
                 <td>
@@ -104,7 +91,9 @@
                 </td>
               </form>
             </tr>
-          @endforeach
+          @else
+            
+          @endisset
         </tbody>
       </table>
       <form action="/" method="get" >

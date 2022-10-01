@@ -16,19 +16,69 @@
   transform: translate(-50% , -50%);
 }
 
+.box-top{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.box-top-right{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.logout-button:hover {
+  background-color: #FF0000;
+  color: white;
+  cursor: pointer;
+}
+
+.logout-button{
+  font-size: 15px;
+    margin-left: 25px;
+    padding: 5px 10px;
+    color: #FF0000;
+    border: solid 1px #FF0000;
+    border-radius: 3px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
 .box-title{
   font-weight: bold;
   font-size: 25px;
   margin-bottom: 15px;
 }
 
+.find-button:hover {
+  background-color: #FFD700;
+  color: white;
+  cursor: pointer;
+}
+
+.find-button {
+  font-size: 15px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  color: #FFD700;
+  border: solid 1px #FFD700;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
 .todo{
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .create-todo{
-  width: 80%;
+  width: 70%;
+  margin-right: 20px;
   border: solid 1px;
   border-radius: 5px;
 }
