@@ -145,3 +145,22 @@ tr{
   color: white;
   cursor: pointer;
 }
+
+.return-button {
+  font-size: 15px;
+  margin-left: 25px;
+  padding: 5px 10px;
+  color: #696969;
+  border: solid 1px #696969;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.return-button:hover {
+  background-color: #696969;
+  color: white;
+  cursor: pointer;
+}
