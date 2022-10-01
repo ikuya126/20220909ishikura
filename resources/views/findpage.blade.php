@@ -58,7 +58,7 @@
             @isset($todos)
               <tr>
               <td>{{ $todos->created_at }}</td>
-              <form action="/find" method="post">
+              <form action="/{{ $todos->id }}" method="post">
                 @csrf
                 @method("put")
                 <td><input type="text" name="title" class="update-title" value="{{$todos->title}}">
@@ -74,9 +74,6 @@
                     @endforeach
                   </select>
                 </td>
-                <form action="/{{ $todos->id }}" method="post" class="update" >
-                @csrf
-                @method('put')
                 <td>
                   <button type="submit"  class="update-button">
                   更新
