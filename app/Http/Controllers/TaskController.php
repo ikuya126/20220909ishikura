@@ -36,6 +36,7 @@ class TaskController extends Controller
     {
         $todo = Todo::find($id);
         $todo->title= $request->input('title');
+        $todo->tag_id=$request->tag_title;
         $todo->save();
         return redirect('/');
     }
@@ -57,14 +58,19 @@ class TaskController extends Controller
         ]);
     }
 
-    public function find(TodoRequest $request)
+    public function find(Request $request)
     {
         $titles = $request->title;
         $users = Auth::user()->id;
         $tags = $request->tag_title;
         $tag = Tag::all();
         $user = Auth::user();
-        $todos = Todo::where(['title'=> $titles,'user_id'=>$users,'tag_id'=>$tags])->first();
+
+        if(!$titles){
+            $todos = Todo::where(['user_id'=>$users,'tag_id'=>$tags])->first();
+        }elseif(!$tags){
+            $todos = Todo::where(['title'=> $titles,'user_id'=>$users])->first();
+        }
         return view('findpage',[
             'tag' => $tag,
             'todos' => $todos,
