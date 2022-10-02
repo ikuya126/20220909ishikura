@@ -37,7 +37,6 @@
           @csrf
           <input type="text" name="title" class="create-todo">
             <select name="tag_title">
-            <option></option>
               @foreach($tag as $tags)
               <option value="{{$tags->id}}">{{$tags->tag_title}}</option>
               @endforeach
